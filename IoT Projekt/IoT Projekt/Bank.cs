@@ -49,7 +49,7 @@ namespace IoT_Projekt
                 while (myRowReader.Read())
                 {
                    string usernameL = (string)myRowReader["usernameL"];
-                    listBox1.Items.Add(myRowReader["usernameL"] + "\t" + myRowReader["username"] + "\t" + myRowReader["password"]);
+                    //listBox1.Items.Add(myRowReader["usernameL"] + "\t" + myRowReader["username"] + "\t" + myRowReader["password"]);
                 }
                 myRowReader.Close();
             }
