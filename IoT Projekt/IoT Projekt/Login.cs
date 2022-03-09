@@ -39,7 +39,7 @@ namespace IoT_Projekt
                 if (connection.State == ConnectionState.Open)
                 {
                     // Debugging
-                    MessageBox.Show("Connection Open");
+                    //MessageBox.Show("Connection Open");
                 }
             }
             // Hvis vores forbindelse fejler, bliver der smidt en "SQL error, samt fejl koden"
@@ -72,7 +72,7 @@ namespace IoT_Projekt
                     #region Backend Login
                     try
                     {
-                        string username = "";
+                        string username = "adsd";
                         MySqlDataReader myReader = null;
                         MySqlCommand myCommand = new MySqlCommand("SELECT * FROM users;", connection);
                         myReader = myCommand.ExecuteReader();

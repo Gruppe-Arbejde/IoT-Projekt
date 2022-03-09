@@ -29,6 +29,7 @@ namespace IoT_Projekt
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUsername = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@ namespace IoT_Projekt
             this.linkLabelSignUp = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -52,11 +54,12 @@ namespace IoT_Projekt
             this.buttonLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonLogin.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.White;
-            this.buttonLogin.Location = new System.Drawing.Point(65, 334);
-            this.buttonLogin.MaximumSize = new System.Drawing.Size(397, 45);
-            this.buttonLogin.MinimumSize = new System.Drawing.Size(397, 45);
+            this.buttonLogin.Location = new System.Drawing.Point(49, 271);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLogin.MaximumSize = new System.Drawing.Size(298, 37);
+            this.buttonLogin.MinimumSize = new System.Drawing.Size(298, 37);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(397, 45);
+            this.buttonLogin.Size = new System.Drawing.Size(298, 37);
             this.buttonLogin.TabIndex = 0;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
@@ -65,11 +68,12 @@ namespace IoT_Projekt
             // textBoxUsername
             // 
             this.textBoxUsername.Font = new System.Drawing.Font("Arial", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUsername.Location = new System.Drawing.Point(65, 132);
-            this.textBoxUsername.MaximumSize = new System.Drawing.Size(397, 45);
-            this.textBoxUsername.MinimumSize = new System.Drawing.Size(397, 45);
+            this.textBoxUsername.Location = new System.Drawing.Point(49, 107);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxUsername.MaximumSize = new System.Drawing.Size(299, 45);
+            this.textBoxUsername.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(397, 50);
+            this.textBoxUsername.Size = new System.Drawing.Size(299, 42);
             this.textBoxUsername.TabIndex = 1;
             this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
             // 
@@ -79,9 +83,10 @@ namespace IoT_Projekt
             this.labelUsername.BackColor = System.Drawing.Color.White;
             this.labelUsername.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelUsername.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsername.Location = new System.Drawing.Point(63, 104);
+            this.labelUsername.Location = new System.Drawing.Point(47, 84);
+            this.labelUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(105, 24);
+            this.labelUsername.Size = new System.Drawing.Size(87, 19);
             this.labelUsername.TabIndex = 2;
             this.labelUsername.Text = "Username";
             // 
@@ -90,21 +95,23 @@ namespace IoT_Projekt
             this.labelPassword.AutoSize = true;
             this.labelPassword.BackColor = System.Drawing.Color.White;
             this.labelPassword.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPassword.Location = new System.Drawing.Point(63, 208);
+            this.labelPassword.Location = new System.Drawing.Point(47, 169);
+            this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(103, 24);
+            this.labelPassword.Size = new System.Drawing.Size(86, 19);
             this.labelPassword.TabIndex = 4;
             this.labelPassword.Text = "Password";
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Arial", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPassword.Location = new System.Drawing.Point(68, 236);
-            this.textBoxPassword.MaximumSize = new System.Drawing.Size(397, 45);
-            this.textBoxPassword.MinimumSize = new System.Drawing.Size(397, 45);
+            this.textBoxPassword.Location = new System.Drawing.Point(51, 192);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPassword.MaximumSize = new System.Drawing.Size(299, 45);
+            this.textBoxPassword.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '•';
-            this.textBoxPassword.Size = new System.Drawing.Size(397, 50);
+            this.textBoxPassword.Size = new System.Drawing.Size(299, 42);
             this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
             // 
@@ -114,9 +121,10 @@ namespace IoT_Projekt
             this.labelUsernameMissing.BackColor = System.Drawing.Color.White;
             this.labelUsernameMissing.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsernameMissing.ForeColor = System.Drawing.Color.Red;
-            this.labelUsernameMissing.Location = new System.Drawing.Point(64, 185);
+            this.labelUsernameMissing.Location = new System.Drawing.Point(48, 150);
+            this.labelUsernameMissing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUsernameMissing.Name = "labelUsernameMissing";
-            this.labelUsernameMissing.Size = new System.Drawing.Size(193, 16);
+            this.labelUsernameMissing.Size = new System.Drawing.Size(145, 14);
             this.labelUsernameMissing.TabIndex = 5;
             this.labelUsernameMissing.Text = "Please enter valid username!";
             // 
@@ -126,9 +134,10 @@ namespace IoT_Projekt
             this.labelPasswordMissing.BackColor = System.Drawing.Color.White;
             this.labelPasswordMissing.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordMissing.ForeColor = System.Drawing.Color.Red;
-            this.labelPasswordMissing.Location = new System.Drawing.Point(65, 289);
+            this.labelPasswordMissing.Location = new System.Drawing.Point(49, 235);
+            this.labelPasswordMissing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPasswordMissing.Name = "labelPasswordMissing";
-            this.labelPasswordMissing.Size = new System.Drawing.Size(190, 16);
+            this.labelPasswordMissing.Size = new System.Drawing.Size(147, 14);
             this.labelPasswordMissing.TabIndex = 6;
             this.labelPasswordMissing.Text = "Please enter valid password!";
             // 
@@ -136,9 +145,10 @@ namespace IoT_Projekt
             // 
             this.checkBoxShowPassword.AutoSize = true;
             this.checkBoxShowPassword.BackColor = System.Drawing.Color.White;
-            this.checkBoxShowPassword.Location = new System.Drawing.Point(401, 215);
+            this.checkBoxShowPassword.Location = new System.Drawing.Point(301, 175);
+            this.checkBoxShowPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBoxShowPassword.Name = "checkBoxShowPassword";
-            this.checkBoxShowPassword.Size = new System.Drawing.Size(64, 21);
+            this.checkBoxShowPassword.Size = new System.Drawing.Size(53, 17);
             this.checkBoxShowPassword.TabIndex = 7;
             this.checkBoxShowPassword.Text = "Show";
             this.checkBoxShowPassword.UseVisualStyleBackColor = false;
@@ -149,9 +159,10 @@ namespace IoT_Projekt
             this.linkLabelPassword.AutoSize = true;
             this.linkLabelPassword.BackColor = System.Drawing.Color.White;
             this.linkLabelPassword.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.linkLabelPassword.Location = new System.Drawing.Point(202, 382);
+            this.linkLabelPassword.Location = new System.Drawing.Point(152, 310);
+            this.linkLabelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabelPassword.Name = "linkLabelPassword";
-            this.linkLabelPassword.Size = new System.Drawing.Size(122, 17);
+            this.linkLabelPassword.Size = new System.Drawing.Size(92, 13);
             this.linkLabelPassword.TabIndex = 8;
             this.linkLabelPassword.TabStop = true;
             this.linkLabelPassword.Text = "Forgot Password?";
@@ -162,9 +173,10 @@ namespace IoT_Projekt
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(185, 473);
+            this.label1.Location = new System.Drawing.Point(139, 384);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
+            this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "New here?";
             // 
@@ -174,9 +186,10 @@ namespace IoT_Projekt
             this.linkLabelSignUp.BackColor = System.Drawing.Color.White;
             this.linkLabelSignUp.ForeColor = System.Drawing.Color.Black;
             this.linkLabelSignUp.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.linkLabelSignUp.Location = new System.Drawing.Point(268, 473);
+            this.linkLabelSignUp.Location = new System.Drawing.Point(201, 384);
+            this.linkLabelSignUp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabelSignUp.Name = "linkLabelSignUp";
-            this.linkLabelSignUp.Size = new System.Drawing.Size(56, 17);
+            this.linkLabelSignUp.Size = new System.Drawing.Size(43, 13);
             this.linkLabelSignUp.TabIndex = 10;
             this.linkLabelSignUp.TabStop = true;
             this.linkLabelSignUp.Text = "Sign up";
@@ -185,26 +198,33 @@ namespace IoT_Projekt
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(39, 43);
+            this.pictureBox1.Location = new System.Drawing.Point(29, 35);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(453, 373);
+            this.pictureBox1.Size = new System.Drawing.Size(340, 303);
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Location = new System.Drawing.Point(39, 451);
+            this.pictureBox2.Location = new System.Drawing.Point(29, 366);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(453, 60);
+            this.pictureBox2.Size = new System.Drawing.Size(340, 49);
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 551);
+            this.ClientSize = new System.Drawing.Size(398, 454);
             this.Controls.Add(this.linkLabelSignUp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabelPassword);
@@ -218,10 +238,11 @@ namespace IoT_Projekt
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(547, 598);
+            this.MaximumSize = new System.Drawing.Size(414, 493);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(547, 598);
+            this.MinimumSize = new System.Drawing.Size(414, 493);
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -246,6 +267,7 @@ namespace IoT_Projekt
         private System.Windows.Forms.LinkLabel linkLabelSignUp;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

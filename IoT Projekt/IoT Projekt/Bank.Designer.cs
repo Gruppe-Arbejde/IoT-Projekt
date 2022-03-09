@@ -31,7 +31,7 @@ namespace IoT_Projekt
         {
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBoxTest = new System.Windows.Forms.TextBox();
+            this.labelWelcome = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
@@ -52,19 +52,21 @@ namespace IoT_Projekt
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBoxTest
+            // labelWelcome
             // 
-            this.textBoxTest.Location = new System.Drawing.Point(355, 24);
-            this.textBoxTest.Name = "textBoxTest";
-            this.textBoxTest.Size = new System.Drawing.Size(100, 20);
-            this.textBoxTest.TabIndex = 2;
+            this.labelWelcome.AutoSize = true;
+            this.labelWelcome.Location = new System.Drawing.Point(13, 13);
+            this.labelWelcome.Name = "labelWelcome";
+            this.labelWelcome.Size = new System.Drawing.Size(112, 13);
+            this.labelWelcome.TabIndex = 2;
+            this.labelWelcome.Text = "Welcome, {username}";
             // 
             // Bank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBoxTest);
+            this.Controls.Add(this.labelWelcome);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Name = "Bank";
@@ -80,6 +82,6 @@ namespace IoT_Projekt
 
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBoxTest;
+        private System.Windows.Forms.Label labelWelcome;
     }
 }
