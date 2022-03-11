@@ -11,12 +11,20 @@ namespace IoT_Projekt
         public MySqlConnection Connection { get => connection; }
         public string sqlBankString { get; set; }
 
-        public Bank()
+        public Bank(string username, string password)
         {
             InitializeComponent();
+            #region Credentials for AccountCheck
+
+            string server = "157.90.11.126";
+            string database = "fakebank";
+
+            string id = $"{username}";
+            string key = $"{password}";
+            #endregion
 
             #region accountCheck
-            sqlBankString = $"Server=157.90.11.126;Port=3306;SslMode=none;User Id=AccountCheck;Password=Losting50##;Database=arduinotest";
+            sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={key};Database={database}";
 
             connection = new MySqlConnection(sqlBankString);
 
@@ -47,7 +55,7 @@ namespace IoT_Projekt
                 myRowReader = myRowCommand.ExecuteReader();
                 while (myRowReader.Read())
                 {
-                   string usernameL = (string)myRowReader["usernameL"];
+                    string usernameL = (string)myRowReader["usernameL"];
                     //listBox1.Items.Add(myRowReader["usernameL"] + "\t" + myRowReader["username"] + "\t" + myRowReader["password"]);
                 }
                 myRowReader.Close();
