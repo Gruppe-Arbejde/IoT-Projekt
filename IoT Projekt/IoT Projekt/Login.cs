@@ -28,6 +28,9 @@ namespace IoT_Projekt
 
             this.textBoxUsername.AutoSize = false;
             this.textBoxPassword.AutoSize = false;
+
+            labelWelcome.BackColor = Color.Transparent;
+
             #endregion
 
             #region accountCheck
@@ -173,12 +176,7 @@ namespace IoT_Projekt
             textBoxPassword.PasswordChar = checkBoxShowPassword.Checked ? '\0' : '•';
         }
 
-        private void linkLabelSignUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Hide();
-            SignUp SignUp = new SignUp();
-            SignUp.ShowDialog();
-        }
         #endregion
+
     }
 }
