@@ -38,10 +38,10 @@ namespace IoT_Projekt
 
             #region accountCheck
             // Vi skaber en string, som kan bruges til at forbinde til vores database, som en bruger der checker en given tabel igennem for at se om der eksistere en kunde.
-            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
+            string accountCheckConnection = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
 
             // Vi laver en connection til databasen, med stringen for oven
-            connection = new MySqlConnection(sqlLogOnString);
+            connection = new MySqlConnection(accountCheckConnection);
 
             try
             {
@@ -73,7 +73,7 @@ namespace IoT_Projekt
 
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e/*, string accountCheckConnection*/)
         {
             if (textBoxUsername.TextLength != 0)
             {
@@ -98,26 +98,21 @@ namespace IoT_Projekt
                             else
                                 break;
                         }
-                        string sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database={database};";
+                        string customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database={database};";
 
                         connection.Close();
                         if (connection.State == ConnectionState.Closed && CredentialOK == true)
                         {
-                            connection = new MySqlConnection(sqlBankString);
+                            connection = new MySqlConnection(customerConnection);
 
                             try
                             {
                                 connection.Open();
                                 if (connection.State == ConnectionState.Open)
                                 {
+                                    #region Open bank, with the correct user connected
 
-
-
-                                    #region Move Login to new form
-
-                                    Bank bank = new Bank(username, password);
-                                    bank.sqlBankString = sqlBankString;
-
+                                    Bank bank = new Bank(username, password, customerConnection, server, database);
                                     bank.Show();
                                     this.Hide();
 
@@ -131,8 +126,8 @@ namespace IoT_Projekt
                         }
                         else
                         {
-                            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
-                            connection = new MySqlConnection(sqlLogOnString);
+                            string accountCheckConnection = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
+                            connection = new MySqlConnection(accountCheckConnection);
                             connection.Open();
                             // Debugging
                             MessageBox.Show("Bruger findes ikke", "Credential Error");
@@ -163,7 +158,6 @@ namespace IoT_Projekt
             }
             #endregion
         }
-
         #region UI
         private void textBoxUsername_TextChanged(object sender, EventArgs e)
         {
@@ -183,6 +177,5 @@ namespace IoT_Projekt
         }
 
         #endregion
-
     }
 }
