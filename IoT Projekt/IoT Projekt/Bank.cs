@@ -14,7 +14,7 @@ namespace IoT_Projekt
         public Bank(string username, string password)
         {
             InitializeComponent();
-            #region Credentials for AccountCheck
+            #region Credentials for Customer
 
             string server = "157.90.11.126";
             string database = "fakebank";
