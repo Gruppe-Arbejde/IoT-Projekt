@@ -30,9 +30,9 @@ namespace IoT_Projekt
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.labelAccountName = new System.Windows.Forms.Label();
             this.labelBalance = new System.Windows.Forms.Label();
+            this.labelAccountName = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,13 +46,16 @@ namespace IoT_Projekt
             this.panel1.Size = new System.Drawing.Size(723, 69);
             this.panel1.TabIndex = 0;
             // 
-            // panel2
+            // labelBalance
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Location = new System.Drawing.Point(12, 101);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(723, 362);
-            this.panel2.TabIndex = 0;
+            this.labelBalance.AutoSize = true;
+            this.labelBalance.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBalance.ForeColor = System.Drawing.Color.Black;
+            this.labelBalance.Location = new System.Drawing.Point(593, 20);
+            this.labelBalance.Name = "labelBalance";
+            this.labelBalance.Size = new System.Drawing.Size(109, 32);
+            this.labelBalance.TabIndex = 1;
+            this.labelBalance.Text = "0,00 kr.";
             // 
             // labelAccountName
             // 
@@ -65,16 +68,13 @@ namespace IoT_Projekt
             this.labelAccountName.TabIndex = 0;
             this.labelAccountName.Text = "(Account Name)";
             // 
-            // labelBalance
+            // panel2
             // 
-            this.labelBalance.AutoSize = true;
-            this.labelBalance.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBalance.ForeColor = System.Drawing.Color.Black;
-            this.labelBalance.Location = new System.Drawing.Point(593, 20);
-            this.labelBalance.Name = "labelBalance";
-            this.labelBalance.Size = new System.Drawing.Size(109, 32);
-            this.labelBalance.TabIndex = 1;
-            this.labelBalance.Text = "0,00 kr.";
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Location = new System.Drawing.Point(12, 101);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(723, 362);
+            this.panel2.TabIndex = 0;
             // 
             // Bank
             // 
@@ -85,7 +85,7 @@ namespace IoT_Projekt
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Bank";
-            this.Text = "Bank";
+            this.Text = "Fake Bank";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bank_FormClosed);
             this.Load += new System.EventHandler(this.Bank_Load);
             this.panel1.ResumeLayout(false);
