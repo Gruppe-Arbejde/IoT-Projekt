@@ -48,14 +48,15 @@ namespace IoT_Projekt
             // 
             // labelBalance
             // 
-            this.labelBalance.AutoSize = true;
+            this.labelBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelBalance.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBalance.ForeColor = System.Drawing.Color.Black;
-            this.labelBalance.Location = new System.Drawing.Point(593, 20);
+            this.labelBalance.Location = new System.Drawing.Point(385, 20);
             this.labelBalance.Name = "labelBalance";
-            this.labelBalance.Size = new System.Drawing.Size(109, 32);
+            this.labelBalance.Size = new System.Drawing.Size(317, 32);
             this.labelBalance.TabIndex = 1;
             this.labelBalance.Text = "0,00 kr.";
+            this.labelBalance.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelAccountName
             // 
