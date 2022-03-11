@@ -12,11 +12,14 @@ namespace IoT_Projekt
         public MySqlConnection Connection { get => connection; }
 
         bool CredentialOK = false;
+
         #region Credentials for AccountCheck
+
         string server = "157.90.11.126";
         string id = "AccountCheck";
         string password = "Losting50##";
         string database = "fakebank";
+
         #endregion
 
         public Login()
@@ -79,11 +82,11 @@ namespace IoT_Projekt
                     {
                         string username = "";
                         MySqlDataReader myReader = null;
-                        MySqlCommand myCommand = new MySqlCommand("SELECT * FROM users;", connection);
+                        MySqlCommand myCommand = new MySqlCommand("SELECT * FROM customers;", connection);
                         myReader = myCommand.ExecuteReader();
                         while (myReader.Read())
                         {
-                            username = (string)myReader["usernameL"];
+                            username = (string)myReader["fname"];
                             if (textBoxUsername.Text.ToLower().Equals(username))
                             {
                                 CredentialOK = true;
@@ -105,10 +108,13 @@ namespace IoT_Projekt
                                 if (connection.State == ConnectionState.Open)
                                 {
 
+
+
                                     #region Move Login to new form
 
-                                    Bank bank = new Bank();
+                                    Bank bank = new Bank(username, password);
                                     bank.sqlBankString = sqlBankString;
+
                                     bank.Show();
                                     this.Hide();
 
