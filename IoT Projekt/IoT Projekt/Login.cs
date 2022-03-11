@@ -73,7 +73,7 @@ namespace IoT_Projekt
 
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e/*, string accountCheckConnection*/)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
             if (textBoxUsername.TextLength != 0)
             {
@@ -84,12 +84,14 @@ namespace IoT_Projekt
                     try
                     {
                         string username = "";
+                        string custid = "";
                         MySqlDataReader myReader = null;
                         MySqlCommand myCommand = new MySqlCommand("SELECT * FROM customers;", connection);
                         myReader = myCommand.ExecuteReader();
                         while (myReader.Read())
                         {
                             username = (string)myReader["fname"];
+                            custid = (string)myReader["custid"];
                             if (textBoxUsername.Text.ToLower().Equals(username))
                             {
                                 CredentialOK = true;
@@ -112,16 +114,15 @@ namespace IoT_Projekt
                                 {
                                     #region Open bank, with the correct user connected
 
-                                    Bank bank = new Bank(username, password, customerConnection, server, database);
+                                    Bank bank = new Bank(username, password, customerConnection, server, database, custid);
                                     bank.Show();
                                     this.Hide();
-
                                     #endregion
                                 }
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message, "SQL error - User connection Error");
+                                MessageBox.Show(ex.Message, "SQL Error");
                             }
                         }
                         else
