@@ -14,6 +14,7 @@ namespace IoT_Projekt
         public Bank(string username, string password)
         {
             InitializeComponent();
+
             #region Credentials for Customer
 
             string server = "157.90.11.126";
@@ -42,6 +43,10 @@ namespace IoT_Projekt
                 // Debugging
                 MessageBox.Show(ex.Message, "SQL error");
             }
+            #endregion
+
+            #region UI
+            this.labelAccountName.Text = username.Substring(0, 1).ToUpper() + username.Substring(1);
             #endregion
         }
 
