@@ -38,6 +38,19 @@ namespace IoT_Projekt
             #region UI
             this.labelAccountName.Text = /*"Welcome, " + */username.Substring(0, 1).ToUpper() + username.Substring(1);
             #endregion
+
+
+            #region show balance
+
+
+
+
+            labelBalance.Text = "";
+
+
+            #endregion
+
+
         }
 
         //private void button1_Click(object sender, EventArgs e)
