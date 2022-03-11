@@ -39,13 +39,14 @@ namespace IoT_Projekt
             this.labelPasswordMissing = new System.Windows.Forms.Label();
             this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
             this.linkLabelPassword = new System.Windows.Forms.LinkLabel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkLabelSignUp = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labelWelcome = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.labelLogin = new System.Windows.Forms.Label();
+            this.labelFakeBank = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,11 +56,12 @@ namespace IoT_Projekt
             this.buttonLogin.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonLogin.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.White;
-            this.buttonLogin.Location = new System.Drawing.Point(519, 348);
-            this.buttonLogin.MaximumSize = new System.Drawing.Size(397, 45);
-            this.buttonLogin.MinimumSize = new System.Drawing.Size(397, 45);
+            this.buttonLogin.Location = new System.Drawing.Point(389, 343);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonLogin.MaximumSize = new System.Drawing.Size(298, 37);
+            this.buttonLogin.MinimumSize = new System.Drawing.Size(298, 37);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(397, 45);
+            this.buttonLogin.Size = new System.Drawing.Size(298, 37);
             this.buttonLogin.TabIndex = 0;
             this.buttonLogin.Text = "Login";
             this.buttonLogin.UseVisualStyleBackColor = false;
@@ -68,11 +70,12 @@ namespace IoT_Projekt
             // textBoxUsername
             // 
             this.textBoxUsername.Font = new System.Drawing.Font("Arial", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxUsername.Location = new System.Drawing.Point(519, 146);
-            this.textBoxUsername.MaximumSize = new System.Drawing.Size(397, 45);
-            this.textBoxUsername.MinimumSize = new System.Drawing.Size(397, 45);
+            this.textBoxUsername.Location = new System.Drawing.Point(392, 141);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxUsername.MaximumSize = new System.Drawing.Size(299, 45);
+            this.textBoxUsername.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(397, 45);
+            this.textBoxUsername.Size = new System.Drawing.Size(299, 45);
             this.textBoxUsername.TabIndex = 1;
             this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
             // 
@@ -82,9 +85,10 @@ namespace IoT_Projekt
             this.labelUsername.BackColor = System.Drawing.Color.White;
             this.labelUsername.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelUsername.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsername.Location = new System.Drawing.Point(517, 118);
+            this.labelUsername.Location = new System.Drawing.Point(391, 118);
+            this.labelUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(105, 24);
+            this.labelUsername.Size = new System.Drawing.Size(87, 19);
             this.labelUsername.TabIndex = 2;
             this.labelUsername.Text = "Username";
             // 
@@ -93,21 +97,23 @@ namespace IoT_Projekt
             this.labelPassword.AutoSize = true;
             this.labelPassword.BackColor = System.Drawing.Color.White;
             this.labelPassword.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPassword.Location = new System.Drawing.Point(517, 222);
+            this.labelPassword.Location = new System.Drawing.Point(388, 232);
+            this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(103, 24);
+            this.labelPassword.Size = new System.Drawing.Size(86, 19);
             this.labelPassword.TabIndex = 4;
             this.labelPassword.Text = "Password";
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Font = new System.Drawing.Font("Arial", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPassword.Location = new System.Drawing.Point(522, 250);
-            this.textBoxPassword.MaximumSize = new System.Drawing.Size(397, 45);
-            this.textBoxPassword.MinimumSize = new System.Drawing.Size(397, 45);
+            this.textBoxPassword.Location = new System.Drawing.Point(392, 255);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxPassword.MaximumSize = new System.Drawing.Size(299, 45);
+            this.textBoxPassword.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '•';
-            this.textBoxPassword.Size = new System.Drawing.Size(397, 45);
+            this.textBoxPassword.Size = new System.Drawing.Size(299, 45);
             this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
             // 
@@ -117,9 +123,10 @@ namespace IoT_Projekt
             this.labelUsernameMissing.BackColor = System.Drawing.Color.White;
             this.labelUsernameMissing.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsernameMissing.ForeColor = System.Drawing.Color.Red;
-            this.labelUsernameMissing.Location = new System.Drawing.Point(518, 199);
+            this.labelUsernameMissing.Location = new System.Drawing.Point(392, 190);
+            this.labelUsernameMissing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelUsernameMissing.Name = "labelUsernameMissing";
-            this.labelUsernameMissing.Size = new System.Drawing.Size(193, 16);
+            this.labelUsernameMissing.Size = new System.Drawing.Size(145, 14);
             this.labelUsernameMissing.TabIndex = 5;
             this.labelUsernameMissing.Text = "Please enter valid username!";
             // 
@@ -129,9 +136,10 @@ namespace IoT_Projekt
             this.labelPasswordMissing.BackColor = System.Drawing.Color.White;
             this.labelPasswordMissing.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordMissing.ForeColor = System.Drawing.Color.Red;
-            this.labelPasswordMissing.Location = new System.Drawing.Point(519, 303);
+            this.labelPasswordMissing.Location = new System.Drawing.Point(391, 301);
+            this.labelPasswordMissing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPasswordMissing.Name = "labelPasswordMissing";
-            this.labelPasswordMissing.Size = new System.Drawing.Size(190, 16);
+            this.labelPasswordMissing.Size = new System.Drawing.Size(147, 14);
             this.labelPasswordMissing.TabIndex = 6;
             this.labelPasswordMissing.Text = "Please enter valid password!";
             // 
@@ -139,9 +147,10 @@ namespace IoT_Projekt
             // 
             this.checkBoxShowPassword.AutoSize = true;
             this.checkBoxShowPassword.BackColor = System.Drawing.Color.White;
-            this.checkBoxShowPassword.Location = new System.Drawing.Point(855, 229);
+            this.checkBoxShowPassword.Location = new System.Drawing.Point(641, 238);
+            this.checkBoxShowPassword.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxShowPassword.Name = "checkBoxShowPassword";
-            this.checkBoxShowPassword.Size = new System.Drawing.Size(64, 21);
+            this.checkBoxShowPassword.Size = new System.Drawing.Size(53, 17);
             this.checkBoxShowPassword.TabIndex = 7;
             this.checkBoxShowPassword.Text = "Show";
             this.checkBoxShowPassword.UseVisualStyleBackColor = false;
@@ -152,76 +161,91 @@ namespace IoT_Projekt
             this.linkLabelPassword.AutoSize = true;
             this.linkLabelPassword.BackColor = System.Drawing.Color.White;
             this.linkLabelPassword.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.linkLabelPassword.Location = new System.Drawing.Point(656, 396);
+            this.linkLabelPassword.Location = new System.Drawing.Point(492, 382);
+            this.linkLabelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabelPassword.Name = "linkLabelPassword";
-            this.linkLabelPassword.Size = new System.Drawing.Size(122, 17);
+            this.linkLabelPassword.Size = new System.Drawing.Size(92, 13);
             this.linkLabelPassword.TabIndex = 8;
             this.linkLabelPassword.TabStop = true;
             this.linkLabelPassword.Text = "Forgot Password?";
             this.linkLabelPassword.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(639, 487);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "New here?";
-            // 
-            // linkLabelSignUp
-            // 
-            this.linkLabelSignUp.AutoSize = true;
-            this.linkLabelSignUp.BackColor = System.Drawing.Color.White;
-            this.linkLabelSignUp.ForeColor = System.Drawing.Color.Black;
-            this.linkLabelSignUp.LinkColor = System.Drawing.Color.DodgerBlue;
-            this.linkLabelSignUp.Location = new System.Drawing.Point(722, 487);
-            this.linkLabelSignUp.Name = "linkLabelSignUp";
-            this.linkLabelSignUp.Size = new System.Drawing.Size(56, 17);
-            this.linkLabelSignUp.TabIndex = 10;
-            this.linkLabelSignUp.TabStop = true;
-            this.linkLabelSignUp.Text = "Sign up";
-            this.linkLabelSignUp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelSignUp_LinkClicked);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(493, 57);
+            this.pictureBox1.Location = new System.Drawing.Point(370, 68);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(453, 373);
+            this.pictureBox1.Size = new System.Drawing.Size(340, 347);
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // labelWelcome
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Location = new System.Drawing.Point(493, 465);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(453, 60);
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
+            this.labelWelcome.AutoSize = true;
+            this.labelWelcome.BackColor = System.Drawing.Color.RoyalBlue;
+            this.labelWelcome.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWelcome.ForeColor = System.Drawing.Color.White;
+            this.labelWelcome.Location = new System.Drawing.Point(12, 68);
+            this.labelWelcome.Name = "labelWelcome";
+            this.labelWelcome.Size = new System.Drawing.Size(161, 32);
+            this.labelWelcome.TabIndex = 14;
+            this.labelWelcome.Text = "Welcome to";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel1.Controls.Add(this.pictureBox3);
+            this.panel1.Controls.Add(this.labelLogin);
+            this.panel1.Controls.Add(this.labelFakeBank);
+            this.panel1.Controls.Add(this.labelWelcome);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(330, 475);
+            this.panel1.TabIndex = 15;
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(44, 150);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(441, 585);
-            this.pictureBox3.TabIndex = 13;
+            this.pictureBox3.Size = new System.Drawing.Size(242, 292);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 17;
             this.pictureBox3.TabStop = false;
+            // 
+            // labelLogin
+            // 
+            this.labelLogin.AutoSize = true;
+            this.labelLogin.BackColor = System.Drawing.Color.RoyalBlue;
+            this.labelLogin.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLogin.ForeColor = System.Drawing.Color.White;
+            this.labelLogin.Location = new System.Drawing.Point(14, 101);
+            this.labelLogin.Name = "labelLogin";
+            this.labelLogin.Size = new System.Drawing.Size(246, 22);
+            this.labelLogin.TabIndex = 16;
+            this.labelLogin.Text = "Login to acces your account";
+            // 
+            // labelFakeBank
+            // 
+            this.labelFakeBank.AutoSize = true;
+            this.labelFakeBank.BackColor = System.Drawing.Color.RoyalBlue;
+            this.labelFakeBank.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFakeBank.ForeColor = System.Drawing.Color.White;
+            this.labelFakeBank.Location = new System.Drawing.Point(164, 69);
+            this.labelFakeBank.Name = "labelFakeBank";
+            this.labelFakeBank.Size = new System.Drawing.Size(152, 32);
+            this.labelFakeBank.TabIndex = 15;
+            this.labelFakeBank.Text = "Fake Bank";
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(996, 585);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.linkLabelSignUp);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(747, 475);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.linkLabelPassword);
             this.Controls.Add(this.checkBoxShowPassword);
             this.Controls.Add(this.labelPasswordMissing);
@@ -232,13 +256,16 @@ namespace IoT_Projekt
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(763, 514);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(763, 514);
             this.Name = "Login";
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -256,11 +283,12 @@ namespace IoT_Projekt
         private System.Windows.Forms.Label labelPasswordMissing;
         private System.Windows.Forms.CheckBox checkBoxShowPassword;
         private System.Windows.Forms.LinkLabel linkLabelPassword;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel linkLabelSignUp;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label labelWelcome;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label labelLogin;
+        private System.Windows.Forms.Label labelFakeBank;
     }
 }
 
