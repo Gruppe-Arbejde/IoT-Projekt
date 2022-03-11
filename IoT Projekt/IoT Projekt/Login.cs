@@ -12,7 +12,12 @@ namespace IoT_Projekt
         public MySqlConnection Connection { get => connection; }
 
         bool CredentialOK = false;
-        string server = "127.0.0.1";
+        #region Credentials for AccountCheck
+        string server = "157.90.11.126";
+        string id = "AccountCheck";
+        string password = "Losting50##";
+        string database = "fakebank";
+        #endregion
 
         public Login()
         {
@@ -27,7 +32,7 @@ namespace IoT_Projekt
 
             #region accountCheck
             // Vi skaber en string, som kan bruges til at forbinde til vores database, som en bruger der checker en given tabel igennem for at se om der eksistere en kunde.
-            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id=AccountCheck;Password=Losting50##;Database=arduinotest";
+            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
 
             // Vi laver en connection til databasen, med stringen for oven
             connection = new MySqlConnection(sqlLogOnString);
@@ -72,7 +77,7 @@ namespace IoT_Projekt
                     #region Backend Login
                     try
                     {
-                        string username = "adsd";
+                        string username = "";
                         MySqlDataReader myReader = null;
                         MySqlCommand myCommand = new MySqlCommand("SELECT * FROM users;", connection);
                         myReader = myCommand.ExecuteReader();
@@ -87,7 +92,7 @@ namespace IoT_Projekt
                             else
                                 break;
                         }
-                        string sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database=arduinotest;";
+                        string sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database={database};";
 
                         connection.Close();
                         if (connection.State == ConnectionState.Closed && CredentialOK == true)
@@ -117,7 +122,7 @@ namespace IoT_Projekt
                         }
                         else
                         {
-                            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id=AccountCheck;Password=Losting50##;Database=arduinotest";
+                            string sqlLogOnString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
                             connection = new MySqlConnection(sqlLogOnString);
                             connection.Open();
                             // Debugging
