@@ -10,7 +10,7 @@ namespace IoT_Projekt
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
 
-        public Bank(string username, string password, string customerConnection, string server, string database)
+        public Bank(string username, string password, string customerConnection, string server, string database, string custid)
         {
             InitializeComponent();
 
@@ -41,41 +41,32 @@ namespace IoT_Projekt
 
 
             #region show balance
+            string acnumber = "";
+            string balance = "";
+            MySqlDataReader reader = null;
+            MySqlCommand cmd = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                acnumber = (string)reader["acnumber"];
+                break;
+            }
+            reader = null;
+            new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                balance = (string)reader["opening_balance"];
+                reader.Close();
+                break;
+            }
 
-
-
-
-            labelBalance.Text = "";
-
+            labelBalance.Text = $"${balance}";
 
             #endregion
 
 
         }
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    this.Cursor = Cursors.WaitCursor;
-        //    try
-        //    {
-        //        MySqlDataReader myRowReader = null;
-        //        MySqlCommand myRowCommand = new MySqlCommand("SELECT * FROM users", connection);
-        //        myRowReader = myRowCommand.ExecuteReader();
-        //        while (myRowReader.Read())
-        //        {
-        //            string usernameL = (string)myRowReader["usernameL"];
-        //        }
-        //        myRowReader.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        this.Cursor = Cursors.Default;
-        //    }
-        //}
 
         private void Bank_FormClosed(object sender, FormClosedEventArgs e)
         {
