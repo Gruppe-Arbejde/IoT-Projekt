@@ -9,21 +9,15 @@ namespace IoT_Projekt
     {
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
-        //public string sqlBankString { get; set; }
 
-        public Bank(string username, string password, string sqlBankString, string server, string database)
+        public Bank(string username, string password, string customerConnection, string server, string database)
         {
             InitializeComponent();
 
-            #region Credentials for Customer
-            //string id = $"{username}";
-            //string key = $"{password}";
-            #endregion
+            #region customerConnection
+            customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
 
-            #region accountCheck
-            sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
-
-            connection = new MySqlConnection(sqlBankString);
+            connection = new MySqlConnection(customerConnection);
 
             try
             {
@@ -42,33 +36,33 @@ namespace IoT_Projekt
             #endregion
 
             #region UI
-            this.labelAccountName.Text = username.Substring(0, 1).ToUpper() + username.Substring(1);
+            this.labelAccountName.Text = /*"Welcome, " + */username.Substring(0, 1).ToUpper() + username.Substring(1);
             #endregion
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor;
-            try
-            {
-                MySqlDataReader myRowReader = null;
-                MySqlCommand myRowCommand = new MySqlCommand("SELECT * FROM users", connection);
-                myRowReader = myRowCommand.ExecuteReader();
-                while (myRowReader.Read())
-                {
-                    string usernameL = (string)myRowReader["usernameL"];
-                }
-                myRowReader.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Default;
-            }
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    this.Cursor = Cursors.WaitCursor;
+        //    try
+        //    {
+        //        MySqlDataReader myRowReader = null;
+        //        MySqlCommand myRowCommand = new MySqlCommand("SELECT * FROM users", connection);
+        //        myRowReader = myRowCommand.ExecuteReader();
+        //        while (myRowReader.Read())
+        //        {
+        //            string usernameL = (string)myRowReader["usernameL"];
+        //        }
+        //        myRowReader.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        this.Cursor = Cursors.Default;
+        //    }
+        //}
 
         private void Bank_FormClosed(object sender, FormClosedEventArgs e)
         {
