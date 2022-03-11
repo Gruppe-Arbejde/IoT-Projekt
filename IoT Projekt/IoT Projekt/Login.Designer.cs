@@ -116,6 +116,7 @@ namespace IoT_Projekt
             this.textBoxPassword.Size = new System.Drawing.Size(299, 42);
             this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
+            this.textBoxPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxPassword_KeyUp);
             // 
             // labelUsernameMissing
             // 
@@ -188,7 +189,7 @@ namespace IoT_Projekt
             this.labelWelcome.ForeColor = System.Drawing.Color.White;
             this.labelWelcome.Location = new System.Drawing.Point(12, 68);
             this.labelWelcome.Name = "labelWelcome";
-            this.labelWelcome.Size = new System.Drawing.Size(160, 32);
+            this.labelWelcome.Size = new System.Drawing.Size(161, 32);
             this.labelWelcome.TabIndex = 14;
             this.labelWelcome.Text = "Welcome to";
             // 
@@ -235,7 +236,7 @@ namespace IoT_Projekt
             this.labelFakeBank.ForeColor = System.Drawing.Color.White;
             this.labelFakeBank.Location = new System.Drawing.Point(164, 69);
             this.labelFakeBank.Name = "labelFakeBank";
-            this.labelFakeBank.Size = new System.Drawing.Size(151, 32);
+            this.labelFakeBank.Size = new System.Drawing.Size(152, 32);
             this.labelFakeBank.TabIndex = 15;
             this.labelFakeBank.Text = "Fake Bank";
             // 
@@ -262,7 +263,7 @@ namespace IoT_Projekt
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(763, 514);
             this.Name = "Login";
-            this.Text = "Login";
+            this.Text = "Fake Bank - Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

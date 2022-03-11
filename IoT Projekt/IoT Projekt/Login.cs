@@ -176,6 +176,15 @@ namespace IoT_Projekt
             textBoxPassword.PasswordChar = checkBoxShowPassword.Checked ? '\0' : '•';
         }
 
+
         #endregion
+
+        private void textBoxPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonLogin.PerformClick();
+            }
+        }
     }
 }
