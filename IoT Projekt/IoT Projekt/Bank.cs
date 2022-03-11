@@ -9,22 +9,18 @@ namespace IoT_Projekt
     {
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
-        public string sqlBankString { get; set; }
+        //public string sqlBankString { get; set; }
 
-        public Bank(string username, string password)
+        public Bank(string username, string password, string sqlBankString, string server, string database)
         {
             InitializeComponent();
             #region Credentials for Customer
-
-            string server = "157.90.11.126";
-            string database = "fakebank";
-
-            string id = $"{username}";
-            string key = $"{password}";
+            //string id = $"{username}";
+            //string key = $"{password}";
             #endregion
 
             #region accountCheck
-            sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={key};Database={database}";
+            sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
 
             connection = new MySqlConnection(sqlBankString);
 
@@ -56,7 +52,6 @@ namespace IoT_Projekt
                 while (myRowReader.Read())
                 {
                     string usernameL = (string)myRowReader["usernameL"];
-                    //listBox1.Items.Add(myRowReader["usernameL"] + "\t" + myRowReader["username"] + "\t" + myRowReader["password"]);
                 }
                 myRowReader.Close();
             }
