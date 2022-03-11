@@ -75,7 +75,7 @@ namespace IoT_Projekt
             this.textBoxUsername.MaximumSize = new System.Drawing.Size(299, 45);
             this.textBoxUsername.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(299, 45);
+            this.textBoxUsername.Size = new System.Drawing.Size(299, 42);
             this.textBoxUsername.TabIndex = 1;
             this.textBoxUsername.TextChanged += new System.EventHandler(this.textBoxUsername_TextChanged);
             // 
@@ -113,7 +113,7 @@ namespace IoT_Projekt
             this.textBoxPassword.MinimumSize = new System.Drawing.Size(299, 45);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '•';
-            this.textBoxPassword.Size = new System.Drawing.Size(299, 45);
+            this.textBoxPassword.Size = new System.Drawing.Size(299, 42);
             this.textBoxPassword.TabIndex = 3;
             this.textBoxPassword.TextChanged += new System.EventHandler(this.textBoxPassword_TextChanged);
             // 
@@ -188,7 +188,7 @@ namespace IoT_Projekt
             this.labelWelcome.ForeColor = System.Drawing.Color.White;
             this.labelWelcome.Location = new System.Drawing.Point(12, 68);
             this.labelWelcome.Name = "labelWelcome";
-            this.labelWelcome.Size = new System.Drawing.Size(161, 32);
+            this.labelWelcome.Size = new System.Drawing.Size(160, 32);
             this.labelWelcome.TabIndex = 14;
             this.labelWelcome.Text = "Welcome to";
             // 
@@ -235,7 +235,7 @@ namespace IoT_Projekt
             this.labelFakeBank.ForeColor = System.Drawing.Color.White;
             this.labelFakeBank.Location = new System.Drawing.Point(164, 69);
             this.labelFakeBank.Name = "labelFakeBank";
-            this.labelFakeBank.Size = new System.Drawing.Size(152, 32);
+            this.labelFakeBank.Size = new System.Drawing.Size(151, 32);
             this.labelFakeBank.TabIndex = 15;
             this.labelFakeBank.Text = "Fake Bank";
             // 
