@@ -10,14 +10,13 @@ namespace IoT_Projekt
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
         public string sqlBankString { get; set; }
-        public string server { get; set; }
 
         public Bank()
         {
             InitializeComponent();
 
             #region accountCheck
-            sqlBankString = $"Server={server};Port=3306;SslMode=none;User Id=AccountCheck;Password=Losting50##;Database=arduinotest";
+            sqlBankString = $"Server=157.90.11.126;Port=3306;SslMode=none;User Id=AccountCheck;Password=Losting50##;Database=arduinotest";
 
             connection = new MySqlConnection(sqlBankString);
 
