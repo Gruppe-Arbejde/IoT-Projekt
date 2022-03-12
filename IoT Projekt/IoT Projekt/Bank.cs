@@ -121,21 +121,23 @@ namespace IoT_Projekt
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            if (connection.State == ConnectionState.Closed)
+            int amount = 100;
+            string target = "Maximus";
+            if (balance >= amount)
             {
-                connection = new MySqlConnection(customerConnection);
-            }
-            else
-            {
-                int amount = 100;
-                string target = "Maximus";
-                if (balance >= 100)
-                {
-                    balance -= 100;
+                
+                //Calculating new balance
+                decimal newSenderBalance = balance - amount;
+                decimal newTargetBalance = TargetBalance + amount;
 
-                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}')", connection);
-                    cmd.ExecuteNonQuery();
-                }
+                //Execute Sql command - Set account balance in Database
+                MySqlCommand cmd = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalance} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalance} WHERE acnumber = '{acnumber}';");
+                cmd.ExecuteNonQuery();
+                //Execute Sql command - Make new transaction in Database
+                cmd = new MySqlCommand(
+                    $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}');", connection);
+                cmd.ExecuteNonQuery();
+
             }
         }
     }
