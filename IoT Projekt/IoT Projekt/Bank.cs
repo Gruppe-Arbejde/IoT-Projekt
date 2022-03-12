@@ -118,10 +118,10 @@ namespace IoT_Projekt
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            if (balance <=)
-            {
+            //if (balance <=)
+            //{
 
-            }
+            //}
         }
     }
 }
