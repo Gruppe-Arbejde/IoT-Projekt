@@ -44,20 +44,23 @@ namespace IoT_Projekt
             string acnumber = "";
             string balance = "";
             MySqlDataReader reader = null;
+
+            // We need to find out the account number that is associated with our login, in order to see the correct account balance
             MySqlCommand cmd = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 acnumber = (string)reader["acnumber"];
+                reader.Close();
                 break;
             }
+            // We've now aquired the account number, now we can find the correct balance
             reader = null;
-            new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
+            cmd = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 balance = (string)reader["opening_balance"];
-                reader.Close();
                 break;
             }
 
