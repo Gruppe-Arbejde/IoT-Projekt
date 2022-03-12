@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace IoT_Projekt
@@ -155,16 +156,24 @@ namespace IoT_Projekt
 
                 //Calculating new balance
                 decimal newSenderBalance = balance - amount;
-                decimal newTargetBalance = targetBalance + amount;
+                decimal newTargetBalance = targetBalance + (decimal)amount;
 
-                string testUno = string.Format("{0:0.00}", newSenderBalance);
-                string testDos = string.Format("{0:0.00}", newTargetBalance);
+                NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
+
+                var newSenderBalanceFormated = newSenderBalance.ToString("N", nfi);
+                var newTargetBalanceFormated = newTargetBalance.ToString("N", nfi);
+                var amountFormated = amount.ToString("N", nfi);
+
+
+                //var testString = $"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", ".");
+
                 //Execute Sql command - Set account balance in Database
-                MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {testUno} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {testDos} WHERE acnumber = '{targetAccountNumber}';", connection);
+                MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", "."), connection);
                 setNewBalance.ExecuteNonQuery();
 
                 //Execute Sql command - Make new transaction in Database
-                MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', '{amount}', '{target}', '{username}');", connection);
+                MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', '{amount}', '{target}', '{username}');".Replace(".", "").Replace(",", "."), connection);
+                setNewTransaction.ExecuteNonQuery();
             }
         }
     }
