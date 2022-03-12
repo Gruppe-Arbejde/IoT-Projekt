@@ -59,8 +59,8 @@ namespace IoT_Projekt
            
             // We need to find out the account number that is associated with our login, in order to see the correct account balance
             MySqlDataReader reader = null;
-            MySqlCommand cmd = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
-            reader = cmd.ExecuteReader();
+            MySqlCommand getUserAccountNumber = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
+            reader = getUserAccountNumber.ExecuteReader();
             while (reader.Read())
             {
                 acnumber = (string)reader["acnumber"];
@@ -69,9 +69,8 @@ namespace IoT_Projekt
             }
 
             // We've now aquired the account number, now we can find the correct balance
-            reader = null;
-            cmd = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
-            reader = cmd.ExecuteReader();
+            MySqlCommand getUserBalance = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
+            reader = getUserBalance.ExecuteReader();
             while (reader.Read())
             {
                 balance = (decimal)reader["opening_balance"];
@@ -87,9 +86,8 @@ namespace IoT_Projekt
 
             #region show recent transactions
 
-            reader = null;
-            cmd = new MySqlCommand($"SELECT * FROM trandetails WHERE acnumber = '{acnumber}';", connection);
-            reader = cmd.ExecuteReader();
+            MySqlCommand getAllUserTransactions = new MySqlCommand($"SELECT * FROM trandetails WHERE acnumber = '{acnumber}';", connection);
+            reader = getAllUserTransactions.ExecuteReader();
             while (reader.Read())
             {
                 DateTime dateOfTransaction = (DateTime)reader["dot"];
@@ -135,23 +133,24 @@ namespace IoT_Projekt
             {
 
                 string target = comboBox1.SelectedItem.ToString();
+                string targetCustomerNumber = "";
                 string targetAccountNumber = "";
                 decimal targetBalance = 0;
                 MySqlDataReader reader = null;
-                MySqlCommand getTargetAcountNumber = new MySqlCommand($"SELECT acnumber FROM account WHERE fname = '{target}'", connection);
-                reader = getTargetAcountNumber.ExecuteReader();
+                MySqlCommand getTargetCustomerNumber = new MySqlCommand($"SELECT custid FROM customers WHERE fname = '{target}'", connection);
+                reader = getTargetCustomerNumber.ExecuteReader();
                 while (reader.Read())
                 {
-                    targetAccountNumber = (string)reader["acnumber"];
+                    targetCustomerNumber = (string)reader["custid"];
                     reader.Close();
                     break;
                 }
-                reader = null;
-                MySqlCommand getTargetBalance = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{targetAccountNumber}'", connection);
+                MySqlCommand getTargetBalance = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{targetCustomerNumber}'", connection);
                 reader = getTargetBalance.ExecuteReader();
                 while (reader.Read())
                 {
                     targetBalance = (decimal)reader["opening_balance"];
+                    targetAccountNumber = (string)reader["acnumber"];
                     reader.Close();
                     break;
                 }
@@ -162,12 +161,11 @@ namespace IoT_Projekt
                 decimal newTargetBalance = targetBalance + amount;
 
                 //Execute Sql command - Set account balance in Database
-                MySqlCommand cmd = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalance} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalance} WHERE acnumber = '{targetAccountNumber}';", connection);
-                cmd.ExecuteNonQuery();
+                MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalance} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalance} WHERE acnumber = '{targetCustomerNumber}';", connection);
+                setNewBalance.ExecuteNonQuery();
                 //Execute Sql command - Make new transaction in Database
-                cmd = new MySqlCommand(
-                    $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', '{amount}', '{target}', '{username}');", connection);
-                cmd.ExecuteNonQuery();
+                MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', '{amount}', '{target}', '{username}');", connection);
+                setNewTransaction.ExecuteNonQuery();
 
             }
         }
