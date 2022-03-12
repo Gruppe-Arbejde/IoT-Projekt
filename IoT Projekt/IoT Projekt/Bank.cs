@@ -10,9 +10,8 @@ namespace IoT_Projekt
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
 
-        public decimal balance;
+        public string balance = "";
         public string acnumber = "";
-        public string username;
 
         public Bank(string username, string password, string customerConnection, string server, string database, string custid)
         {
@@ -63,7 +62,7 @@ namespace IoT_Projekt
             reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                balance = (decimal)reader["opening_balance"];
+                balance = (string)reader["opening_balance"];
                 reader.Close();
                 break;
             }
@@ -119,16 +118,10 @@ namespace IoT_Projekt
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            int amount = 100;
-            string target = "Maximus";
-            if (balance >= 100)
-            {
-                balance -= 100;
-                MySqlCommand cmd = new MySqlCommand();
-                StringBuilder    ($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}')");
-                cmd.
-            
-            }
+            //if (balance <=)
+            //{
+
+            //}
         }
     }
 }
