@@ -82,12 +82,28 @@ namespace IoT_Projekt
             {
                 DateTime dateOfTransaction = (DateTime)reader["dot"];
                 string dot = dateOfTransaction.ToString("yyyy-MM-dd HH:mm:ss");
-                listBoxTransactions.Items.Add(dot + "\t" + reader["transaction_amount"]);
+                decimal amount = (decimal)reader["transaction_amount"];
+                listBoxTransactions.Items.Add(dot + "\t" + amountFormatting(amount, (string)reader["transaction_type"]));
             }
             reader.Close();
 
             #endregion
 
+        }
+
+        private string amountFormatting(decimal amount, string type)
+        {
+            string amountFormatted = string.Format("{0:0.00}", amount);
+            if (type == "Deposit")
+            {
+              amountFormatted = $"+{amountFormatted} kr.";
+            }
+            else if (type == "Withdraw")
+            {
+                amountFormatted = $"-{amountFormatted} kr.";
+            }
+
+            return amountFormatted;
         }
 
         private void Bank_FormClosed(object sender, FormClosedEventArgs e)
