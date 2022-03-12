@@ -34,6 +34,7 @@ namespace IoT_Projekt
             this.labelAccountName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.listBoxTransactions = new System.Windows.Forms.ListBox();
+            this.buttonSend = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -88,12 +89,23 @@ namespace IoT_Projekt
             this.listBoxTransactions.Size = new System.Drawing.Size(407, 355);
             this.listBoxTransactions.TabIndex = 0;
             // 
+            // buttonSend
+            // 
+            this.buttonSend.Location = new System.Drawing.Point(510, 105);
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.Size = new System.Drawing.Size(204, 75);
+            this.buttonSend.TabIndex = 1;
+            this.buttonSend.Text = "Send 100 kr.";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
+            // 
             // Bank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(747, 475);
+            this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Bank";
@@ -114,5 +126,6 @@ namespace IoT_Projekt
         private System.Windows.Forms.Label labelAccountName;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox listBoxTransactions;
+        private System.Windows.Forms.Button buttonSend;
     }
 }

@@ -10,6 +10,9 @@ namespace IoT_Projekt
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
 
+        public string balance = "";
+        public string acnumber = "";
+
         public Bank(string username, string password, string customerConnection, string server, string database, string custid)
         {
             InitializeComponent();
@@ -41,10 +44,7 @@ namespace IoT_Projekt
 
 
             #region show balance
-            string acnumber = "";
-            string balance = "";
-
-
+           
             // We need to find out the account number that is associated with our login, in order to see the correct account balance
             MySqlDataReader reader = null;
             MySqlCommand cmd = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
@@ -114,6 +114,14 @@ namespace IoT_Projekt
         private void Bank_Load(object sender, EventArgs e)
         {
             //MessageBox.Show(this.sqlBankString);
+        }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            if (balance <=)
+            {
+
+            }
         }
     }
 }
