@@ -121,7 +121,6 @@ namespace IoT_Projekt
             this.Name = "Bank";
             this.Text = "Fake Bank";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Bank_FormClosed);
-            this.Load += new System.EventHandler(this.Bank_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

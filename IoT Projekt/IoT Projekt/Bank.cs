@@ -121,11 +121,6 @@ namespace IoT_Projekt
             Environment.Exit(1);
         }
 
-        private void Bank_Load(object sender, EventArgs e)
-        {
-            //MessageBox.Show(this.sqlBankString);
-        }
-
         private void buttonSend_Click(object sender, EventArgs e)
         {
             int amount = 100;
@@ -136,37 +131,55 @@ namespace IoT_Projekt
                 string targetCustomerNumber = "";
                 string targetAccountNumber = "";
                 decimal targetBalance = 0;
-                MySqlDataReader reader = null;
+
+                MySqlDataReader readerTargetCustumerNumber;
+
                 MySqlCommand getTargetCustomerNumber = new MySqlCommand($"SELECT custid FROM customers WHERE fname = '{target}'", connection);
-                reader = getTargetCustomerNumber.ExecuteReader();
-                while (reader.Read())
+                readerTargetCustumerNumber = getTargetCustomerNumber.ExecuteReader();
+                while (readerTargetCustumerNumber.Read())
                 {
-                    targetCustomerNumber = (string)reader["custid"];
-                    reader.Close();
+                    targetCustomerNumber = (string)readerTargetCustumerNumber["custid"];
+                    readerTargetCustumerNumber.Close();
                     break;
                 }
+
+                MySqlDataReader readerTargetBalance;
+
                 MySqlCommand getTargetBalance = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{targetCustomerNumber}'", connection);
-                reader = getTargetBalance.ExecuteReader();
-                while (reader.Read())
+                readerTargetBalance = getTargetBalance.ExecuteReader();
+                while (readerTargetBalance.Read())
                 {
-                    targetBalance = (decimal)reader["opening_balance"];
-                    targetAccountNumber = (string)reader["acnumber"];
-                    reader.Close();
+                    targetBalance = (decimal)readerTargetBalance["opening_balance"];
+                    targetAccountNumber = (string)readerTargetBalance["acnumber"];
+                    readerTargetBalance.Close();
                     break;
                 }
                 
-
                 //Calculating new balance
                 decimal newSenderBalance = balance - amount;
                 decimal newTargetBalance = targetBalance + amount;
 
+                MySqlDataReader readerNewBalance = null;
+
                 //Execute Sql command - Set account balance in Database
                 MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalance} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalance} WHERE acnumber = '{targetCustomerNumber}';", connection);
-                setNewBalance.ExecuteNonQuery();
+                while (readerNewBalance.Read())
+                {
+                    setNewBalance.ExecuteNonQuery();
+                    readerNewBalance.Close();
+                    break;
+                }
+
+                MySqlDataReader readerNewTransaction = null;
+
                 //Execute Sql command - Make new transaction in Database
                 MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', '{amount}', '{target}', '{username}');", connection);
-                setNewTransaction.ExecuteNonQuery();
-
+                while (readerNewTransaction.Read())
+                {
+                    setNewTransaction.ExecuteNonQuery();
+                    readerNewTransaction.Close();
+                    break;
+                }
             }
         }
     }
