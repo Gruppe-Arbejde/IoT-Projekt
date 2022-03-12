@@ -1,6 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Text;
 using System.Windows.Forms;
 
 namespace IoT_Projekt
@@ -13,10 +16,12 @@ namespace IoT_Projekt
         public decimal balance;
         public string acnumber = "";
         public string username;
+        public string customerConnection;
 
         public Bank(string username, string password, string customerConnection, string server, string database, string custid)
         {
             InitializeComponent();
+            this.username = username;
 
             #region customerConnection
             customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
@@ -119,15 +124,21 @@ namespace IoT_Projekt
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            int amount = 100;
-            string target = "Maximus";
-            if (balance >= 100)
+            if (connection.State == ConnectionState.Closed)
             {
-                balance -= 100;
-                MySqlCommand cmd = new MySqlCommand();
-                StringBuilder    ($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}')");
-                cmd.
-            
+                connection = new MySqlConnection(customerConnection);
+            }
+            else
+            {
+                int amount = 100;
+                string target = "Maximus";
+                if (balance >= 100)
+                {
+                    balance -= 100;
+
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', '{amount}', '{username}', '{target}')", connection);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }
