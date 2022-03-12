@@ -33,7 +33,9 @@ namespace IoT_Projekt
             this.labelBalance = new System.Windows.Forms.Label();
             this.labelAccountName = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.listBoxTransactions = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -72,10 +74,19 @@ namespace IoT_Projekt
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.listBoxTransactions);
             this.panel2.Location = new System.Drawing.Point(12, 101);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(723, 362);
+            this.panel2.Size = new System.Drawing.Size(415, 362);
             this.panel2.TabIndex = 0;
+            // 
+            // listBoxTransactions
+            // 
+            this.listBoxTransactions.FormattingEnabled = true;
+            this.listBoxTransactions.Location = new System.Drawing.Point(4, 4);
+            this.listBoxTransactions.Name = "listBoxTransactions";
+            this.listBoxTransactions.Size = new System.Drawing.Size(407, 355);
+            this.listBoxTransactions.TabIndex = 0;
             // 
             // Bank
             // 
@@ -91,6 +102,7 @@ namespace IoT_Projekt
             this.Load += new System.EventHandler(this.Bank_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -101,5 +113,6 @@ namespace IoT_Projekt
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.Label labelAccountName;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.ListBox listBoxTransactions;
     }
 }
