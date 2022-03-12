@@ -97,8 +97,6 @@ namespace IoT_Projekt
                                 CredentialOK = true;
                                 break;
                             }
-                            else
-                                break;
                         }
                         string customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database={database};";
 
