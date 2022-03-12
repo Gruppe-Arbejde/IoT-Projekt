@@ -35,6 +35,7 @@ namespace IoT_Projekt
             this.panel2 = new System.Windows.Forms.Panel();
             this.listBoxTransactions = new System.Windows.Forms.ListBox();
             this.buttonSend = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +92,7 @@ namespace IoT_Projekt
             // 
             // buttonSend
             // 
-            this.buttonSend.Location = new System.Drawing.Point(510, 105);
+            this.buttonSend.Location = new System.Drawing.Point(510, 155);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(204, 75);
             this.buttonSend.TabIndex = 1;
@@ -99,12 +100,21 @@ namespace IoT_Projekt
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(510, 105);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(204, 21);
+            this.comboBox1.TabIndex = 2;
+            // 
             // Bank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(747, 475);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -127,5 +137,6 @@ namespace IoT_Projekt
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ListBox listBoxTransactions;
         private System.Windows.Forms.Button buttonSend;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
