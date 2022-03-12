@@ -36,16 +36,17 @@ namespace IoT_Projekt
             #endregion
 
             #region UI
-            this.labelAccountName.Text = /*"Welcome, " + */username.Substring(0, 1).ToUpper() + username.Substring(1);
+            this.labelAccountName.Text = username.Substring(0, 1).ToUpper() + username.Substring(1);
             #endregion
 
 
             #region show balance
             string acnumber = "";
             string balance = "";
-            MySqlDataReader reader = null;
+
 
             // We need to find out the account number that is associated with our login, in order to see the correct account balance
+            MySqlDataReader reader = null;
             MySqlCommand cmd = new MySqlCommand($"SELECT acnumber FROM account WHERE custid = '{custid}';", connection);
             reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -54,6 +55,7 @@ namespace IoT_Projekt
                 reader.Close();
                 break;
             }
+
             // We've now aquired the account number, now we can find the correct balance
             reader = null;
             cmd = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
@@ -61,13 +63,30 @@ namespace IoT_Projekt
             while (reader.Read())
             {
                 balance = (string)reader["opening_balance"];
+                reader.Close();
                 break;
             }
 
-            labelBalance.Text = $"${balance}";
+            // Finally we can show the correct balance in the UI
+            labelBalance.Text = $"{balance} kr.";
 
             #endregion
 
+
+            #region show recent transactions
+
+            reader = null;
+            cmd = new MySqlCommand($"SELECT * FROM trandetails WHERE acnumber = '{acnumber}';", connection);
+            reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                DateTime dateOfTransaction = (DateTime)reader["dot"];
+                string dot = dateOfTransaction.ToString("yyyy-MM-dd HH:mm:ss");
+                listBoxTransactions.Items.Add(dot + "\t" + reader["transaction_amount"]);
+            }
+            reader.Close();
+
+            #endregion
 
         }
 
