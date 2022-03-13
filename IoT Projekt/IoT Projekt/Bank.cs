@@ -222,6 +222,14 @@ namespace IoT_Projekt
             #endregion
         }
 
+        private void buttonTakeLoan_Click(object sender, EventArgs e)
+        {
+            balance += 1000;   
+            MySqlCommand setUserBalance = new MySqlCommand($"UPDATE account SET opening_balance = {balance} WHERE acnumber = '{acnumber}'; ");
+            setUserBalance.ExecuteNonQuery();
+
+        }
+
         #region UI
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -254,9 +262,5 @@ namespace IoT_Projekt
             Environment.Exit(1);
         }
 
-        private void buttonTakeLoan_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
