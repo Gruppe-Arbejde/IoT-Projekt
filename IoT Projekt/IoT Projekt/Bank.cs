@@ -100,7 +100,7 @@ namespace IoT_Projekt
                 {
                     try
                     {
-                        
+
                         decimal amount = Convert.ToDecimal(textBoxSendAmount.Text);
 
                         if (amount > 0)
@@ -147,7 +147,7 @@ namespace IoT_Projekt
 
                                 var newSenderBalanceFormated = newSenderBalance.ToString("N", nfi).Replace(".", "").Replace(",", ".");
                                 var newTargetBalanceFormated = newTargetBalance.ToString("N", nfi).Replace(".", "").Replace(",", ".");
-                                
+
                                 var amountFormated = amount.ToString("N", nfi).Replace(".", "").Replace(",", ".");
 
                                 //DEBUGGING
@@ -160,7 +160,7 @@ namespace IoT_Projekt
 
                                 //DEBUGGING
                                 //var testStringTwo = $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{target}', '{username}');";
-                                
+
                                 //Execute Sql command - Create new Transaction in Database for sender and Target
                                 MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amountFormated}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amountFormated}, '{username}', '{target}');", connection);
                                 setNewTransaction.ExecuteNonQuery();
@@ -178,13 +178,13 @@ namespace IoT_Projekt
                             {
                                 MessageBox.Show("You don't have enough money to complete the transfer!");
                             }
-                            
+
                         }
                         else
                         {
                             labelAmountMissing.Visible = true;
                         }
-                        
+
                     }
                     catch (Exception)
                     {
@@ -215,7 +215,7 @@ namespace IoT_Projekt
                 DateTime dateOfTransaction = (DateTime)reader["dot"];
                 string dot = dateOfTransaction.ToString("yyyy-MM-dd HH:mm:ss");
                 decimal amount = (decimal)reader["transaction_amount"];
-                listBoxTransactions.Items.Add(dot + "\t" + amountFormatting(amount, (string)reader["transaction_type"]));
+                listBoxTransactions.Items.Add(dot + "\t" + amountFormatting(amount, (string)reader["transaction_type"], (string)reader["money_from"], (string)reader["money_end"]));
             }
             reader.Close();
 
@@ -242,16 +242,16 @@ namespace IoT_Projekt
         }
         #endregion
 
-        private string amountFormatting(decimal amount, string type)
+        private string amountFormatting(decimal amount, string type, string from, string to)
         {
             string amountFormatted = string.Format("{0:0.00}", amount);
             if (type == "Deposit")
             {
-                amountFormatted = $"+{amountFormatted} kr.";
+                amountFormatted = $"{from} \t\t +{amountFormatted} kr.";
             }
             else if (type == "Withdraw")
             {
-                amountFormatted = $"-{amountFormatted} kr.";
+                amountFormatted = $"{to} \t\t -{amountFormatted} kr.";
             }
 
             return amountFormatted;
