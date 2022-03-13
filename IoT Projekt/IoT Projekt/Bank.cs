@@ -11,17 +11,19 @@ namespace IoT_Projekt
         public MySqlConnection connection;
         public MySqlConnection Connection { get => connection; }
 
+        #region Types of variables
         public decimal balance;
         public string acnumber = "";
         public string username;
         public string customerConnection;
+        #endregion
 
         public Bank(string username, string password, string customerConnection, string server, string database, string custid)
         {
             InitializeComponent();
-            this.username = username;
 
             #region customerConnection
+            this.username = username;
             customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
 
             connection = new MySqlConnection(customerConnection);
@@ -58,7 +60,6 @@ namespace IoT_Projekt
 
             #endregion
 
-
             #region show balance
 
             // We need to find out the account number that is associated with our login, in order to see the correct account balance
@@ -87,7 +88,6 @@ namespace IoT_Projekt
 
             #endregion
 
-
             #region show recent transactions
 
             MySqlCommand getAllUserTransactions = new MySqlCommand($"SELECT * FROM trandetails WHERE acnumber = '{acnumber}';", connection);
@@ -105,6 +105,18 @@ namespace IoT_Projekt
 
         }
 
+        #region UI
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelTargetMissing.Visible = false;
+        }
+
+        private void textBoxSendAmount_TextChanged(object sender, EventArgs e)
+        {
+            labelAmountMissing.Visible = false;
+        }
+        #endregion
+
         private string amountFormatting(decimal amount, string type)
         {
             string amountFormatted = string.Format("{0:0.00}", amount);
@@ -118,11 +130,6 @@ namespace IoT_Projekt
             }
 
             return amountFormatted;
-        }
-
-        private void Bank_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Environment.Exit(1);
         }
 
         private void buttonSend_Click(object sender, EventArgs e)
@@ -139,6 +146,7 @@ namespace IoT_Projekt
                         {
                             if (balance >= amount)
                             {
+                                #region Locating target identifiers
                                 string target = comboBox1.SelectedItem.ToString();
                                 string targetCustomerNumber = "";
                                 string targetAccountNumber = "";
@@ -164,7 +172,9 @@ namespace IoT_Projekt
                                     break;
                                 }
                                 readerTargetBalance.Close();
+                                #endregion
 
+                                #region Executing transer and transaction commands
                                 //Calculating new balance
                                 decimal newSenderBalance = balance - amount;
                                 decimal newTargetBalance = targetBalance + amount;
@@ -186,6 +196,9 @@ namespace IoT_Projekt
                                 //var testStringTwo = $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{target}', '{username}');";
                                 MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{username}', '{target}');", connection);
                                 setNewTransaction.ExecuteNonQuery();
+
+                                #endregion
+
                             }
                             else
                             {
@@ -196,12 +209,12 @@ namespace IoT_Projekt
                         {
                             labelAmountMissing.Visible = true;
                         }
-                    }   
+                    }
                     catch (Exception)
                     {
                         labelAmountMissing.Visible = true;
                     }
-                
+
                 }
                 else
                 {
@@ -210,20 +223,13 @@ namespace IoT_Projekt
             }
             else
             {
-                labelTargetMissing.Visible = true;  
+                labelTargetMissing.Visible = true;
             }
         }
 
-        #region UI
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Bank_FormClosed(object sender, FormClosedEventArgs e)
         {
-            labelTargetMissing.Visible = false;
+            Environment.Exit(1);
         }
-
-        private void textBoxSendAmount_TextChanged(object sender, EventArgs e)
-        {
-            labelAmountMissing.Visible = false;
-        }
-        #endregion
     }
 }
