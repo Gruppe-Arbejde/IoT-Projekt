@@ -263,6 +263,7 @@ namespace IoT_Projekt
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(763, 514);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fake Bank - Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
