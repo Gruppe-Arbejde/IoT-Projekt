@@ -237,6 +237,7 @@ namespace IoT_Projekt
             this.buttonTakeLoan.TabIndex = 0;
             this.buttonTakeLoan.Text = "1000 kr.";
             this.buttonTakeLoan.UseVisualStyleBackColor = true;
+            this.buttonTakeLoan.Click += new System.EventHandler(this.buttonTakeLoan_Click);
             // 
             // label1
             // 
