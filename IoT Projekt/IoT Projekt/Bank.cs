@@ -202,7 +202,7 @@ namespace IoT_Projekt
                 labelTargetMissing.Visible = true;
             }
         }
-
+        #region functions
         private void listboxTransactionsRefresh()
         {
             #region show recent transactions
@@ -258,5 +258,6 @@ namespace IoT_Projekt
         {
 
         }
+        #endregion
     }
 }
