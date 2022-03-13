@@ -83,7 +83,7 @@ namespace IoT_Projekt
                     #region Backend Login
                     try
                     {
-                        #region Locating user credentials
+                        //#region Locating user credentials
                         string username = "";
                         string custid = "";
 
@@ -95,25 +95,24 @@ namespace IoT_Projekt
                         {
                             username = (string)myReader["fname"];
                             custid = (string)myReader["custid"];
-                            
+
                             // if the username written by the user on the login page, matches the name in our row "fname" under the table "customers", then we'll change the CredentialOK to true.
                             if (textBoxUsername.Text.ToLower().Equals(username))
                             {
                                 CredentialOK = true;
                                 break;
                             }
+                            //#endregion
                         }
-                        #endregion
 
-                        #region Opening Bank
+                        //#region Opening Bank
                         string customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={textBoxUsername.Text.ToLower()};Password={textBoxPassword.Text};Database={database};";
                         connection.Close();
-                        
+
                         // If the credentials are true, and our connection with the bank as AccountChecker is closed, then we want to open a new connection as the user
                         if (connection.State == ConnectionState.Closed && CredentialOK == true)
                         {
                             connection = new MySqlConnection(customerConnection);
-
                             try
                             {
                                 // If the connection succeeds, then we'll want to open a new window, i.e. our bank 
@@ -131,20 +130,33 @@ namespace IoT_Projekt
                             // But if the connection fails, then we'll thros an error
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message, "SQL Error");
+                                //#region No User Handling
+                                // If the user credentials typed in doesnt match anything in the database, we want to fallback to our AccountCheck user, while also telling our user that the information doesn't exist
+                                string accountCheckConnection = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
+                                connection = new MySqlConnection(accountCheckConnection);
+                                connection.Open();
+                                // Debugging
+                                MessageBox.Show(ex.Message, "Bruger findes ikke");
+                                this.Cursor = Cursors.Default;
+
+                                textBoxErrorHandeling(textBoxPassword);
+                                labelPasswordMissing.Visible = true;
+
+                                textBoxErrorHandeling(textBoxUsername);
+                                labelUsernameMissing.Visible = true;
                             }
                         }
-                        #endregion
+                        //#endregion
 
-                        #region No User Handling
                         else
                         {
+                            //#region No User Handling
                             // If the user credentials typed in doesnt match anything in the database, we want to fallback to our AccountCheck user, while also telling our user that the information doesn't exist
                             string accountCheckConnection = $"Server={server};Port=3306;SslMode=none;User Id={id};Password={password};Database={database}";
                             connection = new MySqlConnection(accountCheckConnection);
                             connection.Open();
                             // Debugging
-                            MessageBox.Show("Bruger findes ikke", "Credential Error");
+                            MessageBox.Show("Bruger findes ikke", "Login Fejl");
                             this.Cursor = Cursors.Default;
 
                             textBoxErrorHandeling(textBoxPassword);
@@ -152,12 +164,12 @@ namespace IoT_Projekt
 
                             textBoxErrorHandeling(textBoxUsername);
                             labelUsernameMissing.Visible = true;
+                            //#endregion
                         }
-                        #endregion
                     }
-                    catch (Exception)
+                    catch (Exception q)
                     {
-                        throw;
+                        MessageBox.Show(q.Message);
                     }
                 }
                 else
