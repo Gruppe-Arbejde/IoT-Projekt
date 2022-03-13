@@ -22,6 +22,9 @@ namespace IoT_Projekt
         {
             InitializeComponent();
 
+            timer1.Interval = 5000;
+            timer1.Enabled = true;
+
             #region customerConnection
             this.username = username;
             customerConnection = $"Server={server};Port=3306;SslMode=none;User Id={username};Password={password};Database={database}";
@@ -202,7 +205,8 @@ namespace IoT_Projekt
                 labelTargetMissing.Visible = true;
             }
         }
-
+        #region functions
+       
         private void listboxTransactionsRefresh()
         {
             #region show recent transactions
@@ -222,6 +226,7 @@ namespace IoT_Projekt
             #endregion
         }
 
+<<<<<<< HEAD
         private void buttonTakeLoan_Click(object sender, EventArgs e)
         {
             NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
@@ -238,6 +243,8 @@ namespace IoT_Projekt
             labelBalance.Text = balance.ToString();
         }
 
+=======
+>>>>>>> 6e17dcb0422396abc591d083a98160773feaf06a
         #region UI
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -270,5 +277,27 @@ namespace IoT_Projekt
             Environment.Exit(1);
         }
 
+        private void buttonTakeLoan_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // We've now aquired the account number, now we can find the correct balance
+            MySqlDataReader reader = null;
+            MySqlCommand getUserBalance = new MySqlCommand($"SELECT opening_balance FROM account WHERE acnumber = '{acnumber}';", connection);
+            reader = getUserBalance.ExecuteReader();
+            while (reader.Read())
+            {
+                balance = (decimal)reader["opening_balance"];
+                break;
+            }
+            reader.Close();
+            
+            listboxTransactionsRefresh();
+            labelBalance.Text = $"{balance} kr.";
+        }
     }
 }
