@@ -29,6 +29,7 @@ namespace IoT_Projekt
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelBalance = new System.Windows.Forms.Label();
             this.labelAccountName = new System.Windows.Forms.Label();
@@ -45,8 +46,9 @@ namespace IoT_Projekt
             this.labelTransferMoneyTo = new System.Windows.Forms.Label();
             this.labelMoneyTransfer = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.buttonTakeLoan = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonTakeLoan = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,7 +84,7 @@ namespace IoT_Projekt
             this.labelAccountName.ForeColor = System.Drawing.Color.Black;
             this.labelAccountName.Location = new System.Drawing.Point(19, 20);
             this.labelAccountName.Name = "labelAccountName";
-            this.labelAccountName.Size = new System.Drawing.Size(226, 32);
+            this.labelAccountName.Size = new System.Drawing.Size(225, 32);
             this.labelAccountName.TabIndex = 0;
             this.labelAccountName.Text = "(Account Name)";
             // 
@@ -228,6 +230,17 @@ namespace IoT_Projekt
             this.panel4.Size = new System.Drawing.Size(290, 40);
             this.panel4.TabIndex = 2;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(17, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(114, 24);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Take Loan";
+            // 
             // buttonTakeLoan
             // 
             this.buttonTakeLoan.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -239,16 +252,9 @@ namespace IoT_Projekt
             this.buttonTakeLoan.UseVisualStyleBackColor = true;
             this.buttonTakeLoan.Click += new System.EventHandler(this.buttonTakeLoan_Click);
             // 
-            // label1
+            // timer1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(17, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 24);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Take Loan";
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Bank
             // 
@@ -296,5 +302,6 @@ namespace IoT_Projekt
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonTakeLoan;
+        private System.Windows.Forms.Timer timer1;
     }
 }
