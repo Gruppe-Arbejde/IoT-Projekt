@@ -224,10 +224,18 @@ namespace IoT_Projekt
 
         private void buttonTakeLoan_Click(object sender, EventArgs e)
         {
+            NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
             balance += 1000;   
-            MySqlCommand setUserBalance = new MySqlCommand($"UPDATE account SET opening_balance = {balance} WHERE acnumber = '{acnumber}'; ");
+
+            var balanceFormatted = balance.ToString("N", nfi).Replace(".", "").Replace(",", ".");
+            MySqlCommand setUserBalance = new MySqlCommand($"UPDATE account SET opening_balance = {balanceFormatted} WHERE acnumber = '{acnumber}'; ", connection);
             setUserBalance.ExecuteNonQuery();
 
+            MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', 1000, 'root', '{username}');", Connection);
+            setNewTransaction.ExecuteNonQuery();
+
+            listboxTransactionsRefresh();
+            labelBalance.Text = balance.ToString();
         }
 
         #region UI
