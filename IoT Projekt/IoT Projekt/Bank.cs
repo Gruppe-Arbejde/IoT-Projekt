@@ -45,6 +45,9 @@ namespace IoT_Projekt
             #region UI
             this.labelAccountName.Text = username.Substring(0, 1).ToUpper() + username.Substring(1);
 
+            labelTargetMissing.Visible = false;
+            labelAmountMissing.Visible = false;
+
             MySqlDataAdapter getAllUsers = new MySqlDataAdapter($"SELECT fname FROM customers WHERE custid != '{custid}'", connection);
             DataTable dt = new DataTable();
             getAllUsers.Fill(dt);
@@ -124,57 +127,103 @@ namespace IoT_Projekt
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            decimal amount = 100;
-            if (balance >= amount)
+            if (comboBox1.SelectedItem != null)
             {
-
-                string target = comboBox1.SelectedItem.ToString();
-                string targetCustomerNumber = "";
-                string targetAccountNumber = "";
-                decimal targetBalance = 0;
-
-                MySqlDataReader readerTargetCustumerNumber = null;
-                MySqlCommand getTargetCustomerNumber = new MySqlCommand($"SELECT custid FROM customers WHERE fname = '{target}'", connection);
-                readerTargetCustumerNumber = getTargetCustomerNumber.ExecuteReader();
-                while (readerTargetCustumerNumber.Read())
+                if (textBoxSendAmount.Text.Length != 0)
                 {
-                    targetCustomerNumber = (string)readerTargetCustumerNumber["custid"];
-                    break;
-                }
-                readerTargetCustumerNumber.Close();
+                    try
+                    {
+                        decimal amount = Convert.ToDecimal(textBoxSendAmount.Text);
 
-                MySqlDataReader readerTargetBalance = null;
-                MySqlCommand getTargetBalance = new MySqlCommand($"SELECT opening_balance, acnumber FROM account WHERE custid = '{targetCustomerNumber}'", connection);
-                readerTargetBalance = getTargetBalance.ExecuteReader();
-                while (readerTargetBalance.Read())
+                        if (amount > 0)
+                        {
+                            if (balance >= amount)
+                            {
+                                string target = comboBox1.SelectedItem.ToString();
+                                string targetCustomerNumber = "";
+                                string targetAccountNumber = "";
+                                decimal targetBalance = 0;
+
+                                MySqlDataReader readerTargetCustumerNumber = null;
+                                MySqlCommand getTargetCustomerNumber = new MySqlCommand($"SELECT custid FROM customers WHERE fname = '{target}'", connection);
+                                readerTargetCustumerNumber = getTargetCustomerNumber.ExecuteReader();
+                                while (readerTargetCustumerNumber.Read())
+                                {
+                                    targetCustomerNumber = (string)readerTargetCustumerNumber["custid"];
+                                    break;
+                                }
+                                readerTargetCustumerNumber.Close();
+
+                                MySqlDataReader readerTargetBalance = null;
+                                MySqlCommand getTargetBalance = new MySqlCommand($"SELECT opening_balance, acnumber FROM account WHERE custid = '{targetCustomerNumber}'", connection);
+                                readerTargetBalance = getTargetBalance.ExecuteReader();
+                                while (readerTargetBalance.Read())
+                                {
+                                    targetBalance = (decimal)readerTargetBalance["opening_balance"];
+                                    targetAccountNumber = (string)readerTargetBalance["acnumber"];
+                                    break;
+                                }
+                                readerTargetBalance.Close();
+
+                                //Calculating new balance
+                                decimal newSenderBalance = balance - amount;
+                                decimal newTargetBalance = targetBalance + amount;
+
+                                NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
+
+                                var newSenderBalanceFormated = newSenderBalance.ToString("N", nfi);
+                                var newTargetBalanceFormated = newTargetBalance.ToString("N", nfi);
+                                var amountFormated = amount.ToString("N", nfi);
+
+
+                                //var testString = $"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", ".");
+
+                                //Execute Sql command - Set account balance in Database
+                                MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", "."), connection);
+                                setNewBalance.ExecuteNonQuery();
+                                balance = newSenderBalance;
+
+                                //var testStringTwo = $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{target}', '{username}');";
+                                MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{username}', '{target}');", connection);
+                                setNewTransaction.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                MessageBox.Show("You don't have enough money to complete the transfer!");
+                            }
+                        }
+                        else
+                        {
+                            labelAmountMissing.Visible = true;
+                        }
+                    }   
+                    catch (Exception)
+                    {
+                        labelAmountMissing.Visible = true;
+                    }
+                
+                }
+                else
                 {
-                    targetBalance = (decimal)readerTargetBalance["opening_balance"];
-                    targetAccountNumber = (string)readerTargetBalance["acnumber"];
-                    break;
+                    labelAmountMissing.Visible = true;
                 }
-                readerTargetBalance.Close();
-
-                //Calculating new balance
-                decimal newSenderBalance = balance - amount;
-                decimal newTargetBalance = targetBalance + amount;
-
-                NumberFormatInfo nfi = new CultureInfo("da-DK", false).NumberFormat;
-
-                var newSenderBalanceFormated = newSenderBalance.ToString("N", nfi);
-                var newTargetBalanceFormated = newTargetBalance.ToString("N", nfi);
-                var amountFormated = amount.ToString("N", nfi);
-
-
-                //var testString = $"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", ".");
-
-                //Execute Sql command - Set account balance in Database
-                MySqlCommand setNewBalance = new MySqlCommand($"UPDATE account SET opening_balance = {newSenderBalanceFormated} WHERE acnumber = '{acnumber}'; UPDATE account SET opening_balance = {newTargetBalanceFormated} WHERE acnumber = '{targetAccountNumber}';".Replace(".", "").Replace(",", "."), connection);
-                setNewBalance.ExecuteNonQuery();
-
-                //var testStringTwo = $"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{target}', '{username}');";
-                MySqlCommand setNewTransaction = new MySqlCommand($"INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{acnumber}', CURRENT_TIMESTAMP, 'Cheque', 'Withdraw', {amount}, '{username}', '{target}'); INSERT INTO trandetails(acnumber, dot, medium_of_transaction, transaction_type, transaction_amount, money_from, money_end) VALUES('{targetAccountNumber}', CURRENT_TIMESTAMP, 'Cheque', 'Deposit', {amount}, '{username}', '{target}');", connection);
-                setNewTransaction.ExecuteNonQuery();
+            }
+            else
+            {
+                labelTargetMissing.Visible = true;  
             }
         }
+
+        #region UI
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            labelTargetMissing.Visible = false;
+        }
+
+        private void textBoxSendAmount_TextChanged(object sender, EventArgs e)
+        {
+            labelAmountMissing.Visible = false;
+        }
+        #endregion
     }
 }
