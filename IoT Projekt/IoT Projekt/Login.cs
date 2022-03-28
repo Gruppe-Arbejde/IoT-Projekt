@@ -15,10 +15,10 @@ namespace IoT_Projekt
 
         #region Credentials for AccountCheck
         // Here we have the login information for our Account Checker user in the database
-        string server = "157.90.11.126";
-        string id = "AccountCheck";
-        string password = "Losting50##";
-        string database = "fakebank";
+        string server = "server";
+        string id = "id";
+        string password = "password";
+        string database = "database";
 
         #endregion
 
